@@ -12,6 +12,10 @@ In application.properties
 ## ToDo
 Create Front End
 
-## Run to run front end 
+## Run to run Front End 
 - cd frontend
 - npm run serve
+
+## What are we using for Vue (front end)
+- element UI (https://element.eleme.io/#/en-US/component/layout)
+- scss
