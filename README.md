@@ -1,5 +1,5 @@
 # StudentManager
-Student Manager App with Spring Boot, MySQL, Angular.
+Student Manager App with Spring Boot, MySQL, Vue.
 
 ## Database Connection:
 In application.properties
