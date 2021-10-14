@@ -10,6 +10,5 @@ In application.properties
 * spring.jpa.properties.dialect=org.hibernate.dialect.MySQL8Dialect
 
 ## ToDo
-Add Angular
-Learn about angular, to do front end.
+Create Front End
 
