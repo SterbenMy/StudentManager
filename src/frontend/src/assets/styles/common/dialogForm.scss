@@ -1,0 +1,111 @@
+.settings-dialog {
+  .el-dialog__body {
+    .settings-dialog-form {
+      .el-form-item__label {
+        color: #2d2d2d;
+        font-weight: 400;
+        font-size: 0.875rem;
+        line-height: 1.063rem;
+        margin-bottom: 0.125rem;
+        padding: 0;
+      }
+
+      .el-form-item__content {
+        .el-input {
+          .el-input__inner {
+            color: #2d2d2d;
+            font-weight: 400;
+            font-size: 1rem;
+            line-height: 1.25rem;
+            border-radius: 0.5rem;
+          }
+        }
+
+        .el-textarea {
+          .el-textarea__inner {
+            color: #2d2d2d;
+            font-weight: 400;
+            font-size: 1rem;
+            line-height: 1.25rem;
+            background-color: #eef3f5;
+            border-radius: 0.5rem;
+            border-color: transparent;
+            min-height: 160px !important;
+            resize: none;
+
+            &:hover {
+              border-color: $--color-primary;
+            }
+          }
+        }
+
+        .el-select {
+          width: 100%;
+          border-radius: 0.5rem;
+
+          .el-select-dropdown {
+            z-index: 9999;
+          }
+
+          input {
+            color: #707070 !important;
+
+            &:hover,
+            &:active,
+            &:focus {
+              background-color: #dfeaef;
+              color: #2d2d2d !important;
+              border: 0.0625rem solid transparent;
+            }
+          }
+
+          &:hover,
+          &:active,
+          &:focus {
+            i {
+              color: $--color-primary;
+            }
+          }
+
+          i {
+            font-size: 1.25rem;
+            color: #000000;
+            font-weight: 700;
+            margin-right: 0.625rem;
+          }
+        }
+      }
+
+      .button-container-actions {
+        display: flex;
+        justify-content: flex-end;
+
+        .el-button {
+          font-weight: 600;
+          font-size: 1rem;
+          line-height: 1.25rem;
+          border: none;
+          padding: 0;
+
+          &:nth-child(1) {
+            color: #707070;
+            width: auto;
+            background-color: #ffffff;
+
+            &:hover {
+              color: $--color-primary;
+            }
+          }
+
+          &:nth-child(2) {
+            background: $--color-primary 0 0 no-repeat padding-box;
+            color: #ffffff;
+            border-radius: 0.5rem;
+            padding: 0.875rem 2.375rem;
+            margin-left: 3rem;
+          }
+        }
+      }
+    }
+  }
+}

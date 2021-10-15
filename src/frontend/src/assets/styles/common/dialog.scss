@@ -1,0 +1,37 @@
+.settings-dialog {
+  width: 504px;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  margin-top: 8rem;
+  box-shadow: none;
+
+  .el-dialog__header {
+    padding: 1.875rem 2.5rem 0.75rem 2.5rem;
+    text-align: left;
+
+    .el-dialog__headerbtn {
+      display: none;
+    }
+
+    .el-dialog__title {
+      color: #707070;
+      font-weight: 500;
+      font-size: 1.25rem;
+      line-height: 2.25rem;
+    }
+  }
+
+  .el-dialog__body {
+    padding: 0 2.5rem 2.5rem 2.5rem;
+
+    .el-form {
+      margin-bottom: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .settings-dialog {
+    width: 100% !important;
+  }
+}
