@@ -6,31 +6,50 @@
       </el-col>
     </el-row>
     <div class="scroll-card">
-      <div class="div-card" v-for="o in 10" :key="o">
+      <div class="div-card" v-for="course in courses" :key="course.id">
         <el-card class="card">
           <div slot="header" class="clearfix">
-            <span>Course name</span>
-            <span>Students: 0 </span>
+            <span>Course: {{ course.name }}{{course.number}}</span>
+            <span>Students: {{course.students.length}} </span>
           </div>
           <div class="buttons-group">
             <el-button>Edit</el-button>
             <el-button>Details</el-button>
-            <delete-course-component></delete-course-component>
+            <delete-course-component  :course-id="course.id"></delete-course-component>
           </div>
         </el-card>
       </div>
     </div>
     <div class="add-button">
-      <el-button>Add new course</el-button>
+<!--      <el-button>Add new course</el-button>-->
+      <add-course-component></add-course-component>
     </div>
   </div>
 </template>
 
 <script>
 import DeleteCourseComponent from "@/components/courses/DeleteCourseComponent";
+import AddCourseComponent from "@/components/courses/AddCourseComponent";
+import CourseService from "@/services/CourseService";
+
 export default {
   name: "CoursesList",
-  components: {DeleteCourseComponent}
+  components: {AddCourseComponent, DeleteCourseComponent},
+  data() {
+    return {
+      courses: [],
+    };
+  },
+  methods: {
+    getCourses() {
+      CourseService.getCourses().then((response) => {
+        this.courses = response.data;
+      });
+    }
+  },
+  mounted() {
+    this.getCourses();
+  }
 }
 </script>
 
@@ -66,6 +85,7 @@ export default {
 
     .div-card {
       padding: 1rem;
+
       .card {
         width: 350px;
         border-radius: 0.5rem;
