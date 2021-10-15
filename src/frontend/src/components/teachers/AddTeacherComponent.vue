@@ -17,11 +17,11 @@
           <el-input v-model="addTeacherForm.name"></el-input>
         </el-form-item>
         <el-form-item label="Surname:" prop="surname">
-          <el-input  v-model="addTeacherForm.name">
+          <el-input  v-model="addTeacherForm.surname">
           </el-input>
         </el-form-item>
         <el-form-item label="Course:" prop="course">
-          <el-input  v-model="addCourseForm.name">
+          <el-input  v-model="addTeacherForm.course">
           </el-input>
         </el-form-item>
         <div class="button-container-actions">
@@ -31,7 +31,6 @@
           <el-button @click="submitForm('addTeacherForm')" class="button-submit">
             Add teacher
           </el-button>
-
         </div>
       </el-form>
     </el-dialog>
@@ -44,7 +43,7 @@ export default {
   data() {
     return {
       dialogVisible: false,
-      addCourseForm: {
+      addTeacherForm: {
         name: "",
         surname: "",
         course: ""
