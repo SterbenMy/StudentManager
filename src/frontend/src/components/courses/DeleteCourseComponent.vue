@@ -1,23 +1,27 @@
 <template>
-  <div >
-    <el-button @click="handleDelete()">Delete</el-button>
+  <div>
+    <el-button @click="handleDelete(courseId)">Delete</el-button>
   </div>
 </template>
 
 <script>
 export default {
   name: "DeleteCourseComponent",
-  // trebuie de facut props care cere acel id in view-ul principal
+  props: {
+    courseId: {
+      required: true,
+      type: Number,
+    },
+  },
   methods: {
-    //parametru id la elementul din array
-    handleDelete() {
+    handleDelete(id) {
       this.$confirm("Are you sure to delete this course?", {
         confirmButtonText: "Delete",
         cancelButtonText: "Cancel",
         customClass: "delete-message-box",
       })
           .then(() => {
-            //tipa sterge aici vuex  delete this.element[id];
+            console.log(id);
           })
           .catch(() => {
             return 0;
