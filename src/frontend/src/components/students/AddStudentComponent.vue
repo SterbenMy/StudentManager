@@ -11,7 +11,7 @@
       <el-form class="settings-dialog-form"
                :model="addStudentForm"
                :rules="rules"
-               ref="addCourseForm"
+               ref="addStudentForm"
       >
 
         <el-form-item label="Name:" prop="name">
@@ -46,20 +46,13 @@ export default {
   data() {
     return {
       dialogVisible: false,
-      addCourseForm: {
+      addStudentForm: {
         name: "",
         surname: "",
         email: "",
         gender: ""
       },
       rules: {
-        number: [
-          {
-            required: true,
-            message: "Number is required",
-            trigger: ["blur", "change"],
-          },
-        ],
         name: [
           {
             required: true,
@@ -98,10 +91,10 @@ export default {
         if (valid) {
           console.log('submit!');
           this.dialogVisible=false;
-          this.addCourseForm.name="";
-          this.addCourseForm.surname="";
-          this.addCourseForm.email="";
-          this.addCourseForm.gender="";
+          this.addStudentForm.name="";
+          this.addStudentForm.surname="";
+          this.addStudentForm.email="";
+          this.addStudentForm.gender="";
         } else {
           console.log('error submit!!');
           return false;
