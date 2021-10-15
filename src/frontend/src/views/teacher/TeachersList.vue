@@ -1,43 +1,75 @@
 <template>
-  <div class="courses-list">
-    <el-row class="row-title-teacher">
-      <el-col :span="24">
-        <span>Teachers</span>
-      </el-col>
-    </el-row>
-    <div class="scroll-card">
-      <div class="div-card" v-for="teacher in teachers" :key="teacher.id">
-        <el-card class="card">
-          <div slot="header" class="clearfix">
-            <span>Teacher: {{ teacher.name }}{{teacher.surname}}</span>
-            <span>Course: {{teacher.courses.length}} </span>
-          </div>
-          <div class="buttons-group">
-            <el-button>Edit</el-button>
-            <el-button>Details</el-button>
-            <delete-teacher-component  :teacher-id="teacher.id"></delete-teacher-component>
-          </div>
-        </el-card>
-      </div>
+  <div class="teachers-list">
+    <div class="row-title-teacher">
+      <span>Teachers</span>
     </div>
-    <div class="add-button">
-      <!--      <el-button>Add new course</el-button>-->
-      <add-teacher-component></add-teacher-component>
+    <div>
+      <add-teacher-component><el-button>Add teacher</el-button></add-teacher-component>
+    </div>
+    <div style="width: 100%">
+      <el-table :data="teachers" >
+        <el-table-column label="Name" class-name="table-column-name">
+          <template slot-scope="scope">
+            {{ scope.row.name }}
+          </template>
+        </el-table-column>
+        <el-table-column
+            label="Surname"
+            class-name="table-column-surname"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.surname }}
+          </template>
+        </el-table-column>
+        <el-table-column
+            label="Email"
+            class-name="table-column-email"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.email}}
+          </template>
+        </el-table-column>
+        <el-table-column
+            label="Gender"
+            class-name="table-column-gender"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.gender }}
+          </template>
+        </el-table-column>
+        <el-table-column
+            class-name="table-column-actions-buttons"
+            label="Actions"
+            align="right"
+        >
+          <template v-if="!scope.row.visible" slot-scope="scope">
+            <router-link
+                :to="{ name: 'EditTeacher', params: { id: scope.row.id } }"
+            >
+              <el-button type="primary" icon="el-icon-edit" circle></el-button>
+            </router-link>
+            <delete-teacher-component
+                :teacher-id="scope.row.id"
+            ><el-button type="danger" icon="el-icon-delete" circle></el-button></delete-teacher-component>
+          </template>
+        </el-table-column>
+      </el-table>
     </div>
   </div>
 </template>
 
 <script>
-import DeleteTeacherComponent from "@/components/teachers/DeleteTeacherComponent";
+//import DeleteTeacherComponent from "@/components/teachers/DeleteTeacherComponent";
 import AddTeacherComponent from "@/components/teachers/AddTeacherComponent";
 import TeacherService from "@/services/TeacherServices";
 
 export default {
   name: "TeacherList",
-  components: {AddTeacherComponent, DeleteTeacherComponent},
+  components: {AddTeacherComponent},
+  //components: {AddTeacherComponent, DeleteTeacherComponent},
   data() {
     return {
-      courses: [],
+      teachers: [],
     };
   },
   methods: {
@@ -48,13 +80,12 @@ export default {
     }
   },
   mounted() {
-    this.getTeachers();
+    this.teachers = this.getTeachers();
   }
 }
 </script>
-
 <style scoped lang="scss">
-.courses-list {
+.teachers-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -100,5 +131,4 @@ export default {
     }
   }
 }
-
 </style>
