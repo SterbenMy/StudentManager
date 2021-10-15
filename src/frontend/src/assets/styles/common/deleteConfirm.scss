@@ -1,0 +1,87 @@
+.el-popup-parent--hidden {
+  // Container Message
+  .delete-message-box {
+    width: 504px;
+    padding-bottom: 0;
+    border-radius: 0.5rem;
+    border: none;
+    vertical-align: top;
+    margin-top: 8rem;
+
+    // Delete button X
+    .el-message-box__header {
+      display: none;
+    }
+
+    .el-message-box__content {
+      padding: 2.5rem 2.375rem;
+      color: #707070;
+      font-weight: 500;
+      font-size: 1.25rem;
+
+      p {
+        line-height: 2.25rem;
+      }
+    }
+
+    // Button Cancel and Decline
+    .el-message-box__btns {
+      padding: 0 2.5rem 2.5rem 2.5rem;
+
+      button {
+        &:nth-child(2) {
+          margin-left: 3rem;
+        }
+      }
+
+      .el-button--small {
+        font-weight: 600;
+        font-size: 1rem;
+        line-height: 1.25rem;
+        padding: 0;
+        border: none;
+        color: #707070;
+
+        &:hover {
+          background-color: #ffffff;
+          color: $--color-primary;
+        }
+      }
+
+      // Button Decline
+      .el-button--primary {
+        width: 168px;
+        height: 48px;
+        background: rgba(200, 57, 134, 0.1);
+        border-radius: 0.5rem;
+        color: $--color-danger;
+
+        &:hover {
+          background-color: $--color-danger;
+          color: #ffffff;
+        }
+      }
+    }
+  }
+
+  // Container Hidden
+  .v-modal {
+    opacity: 0.3;
+    background-color: #000000;
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .el-message-box__wrapper {
+    display: flex;
+    justify-content: center;
+    bottom: auto;
+
+    .delete-message-box {
+      .el-message-box__btns {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+}
