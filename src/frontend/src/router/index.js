@@ -7,14 +7,29 @@ Vue.use(VueRouter);
 const routes = [
     {
         path: "/",
-        name: "Home",
+        name: "Index",
         redirect: { name: "Home" },
-        component: () => import("@/views/Home"),
+        component: () => import("@/views/Index"),
         children: [
             {
                 path: "/home",
                 name: "Home",
                 component: Home,
+            },
+            {
+              path: "/courses",
+              name: "CoursesList",
+              component: () => import("@/views/course/CoursesList"),
+            },
+            {
+                path: "/students",
+                name: "StudentsList",
+                component: () => import("@/views/student/StudentsList"),
+            },
+            {
+                path: "/teachers",
+                name: "TeachersList",
+                component: () => import("@/views/teacher/TeachersList"),
             },
         ],
     },
