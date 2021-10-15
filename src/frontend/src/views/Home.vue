@@ -1,4 +1,5 @@
 <template>
+
   <div class="home">
     <span class="span-welcome">Welcome to Student Manager App</span>
     <el-row class="el-row-home">
