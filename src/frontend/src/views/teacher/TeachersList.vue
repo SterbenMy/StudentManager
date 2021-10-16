@@ -44,7 +44,7 @@
         >
           <template v-if="!scope.row.visible" slot-scope="scope">
             <router-link
-                :to="{ name: 'EditTeacher', params: { id: scope.row.id } }"
+                :to="{ name: 'EditTeacherComponent', params: { id: scope.row.id } }"
             >
               <el-button type="primary" icon="el-icon-edit" circle></el-button>
             </router-link>
@@ -59,29 +59,27 @@
 </template>
 
 <script>
-//import DeleteTeacherComponent from "@/components/teachers/DeleteTeacherComponent";
+import DeleteTeacherComponent from "@/components/teachers/DeleteTeacherComponent";
 import AddTeacherComponent from "@/components/teachers/AddTeacherComponent";
-import TeacherService from "@/services/TeacherServices";
+// import TeacherService from "@/services/TeacherServices";
 
 export default {
   name: "TeacherList",
-  components: {AddTeacherComponent},
-  //components: {AddTeacherComponent, DeleteTeacherComponent},
+  components: {AddTeacherComponent, DeleteTeacherComponent},
   data() {
     return {
       teachers: [],
     };
   },
   methods: {
-    getTeachers() {
-      TeacherService.getTeachers().then((response) => {
-        this.teachers = response.data;
-      });
-    }
+    async getList() {
+      this.$store.dispatch("getList");
+      this.teachers = await this.$store.getters.getTeachersList;
+    },
   },
   mounted() {
-    this.teachers = this.getTeachers();
-  }
+    this.getList();
+  },
 }
 </script>
 <style scoped lang="scss">

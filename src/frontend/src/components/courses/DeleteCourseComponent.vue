@@ -21,7 +21,7 @@ export default {
         customClass: "delete-message-box",
       })
           .then(() => {
-            console.log(id);
+            this.$store.dispatch("delete", id);
           })
           .catch(() => {
             return 0;

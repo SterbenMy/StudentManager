@@ -27,10 +27,20 @@ const routes = [
                 component: () => import("@/views/student/StudentsList"),
             },
             {
+                path:"/student/:id/edit",
+                name:"EditStudentComponent",
+                component:()=>import("@/components/students/EditStudentComponent"),
+            },
+            {
                 path: "/teachers",
                 name: "TeachersList",
                 component: () => import("@/views/teacher/TeachersList"),
             },
+            {
+                path:"/teacher/:id/edit",
+                name:"EditTeacherComponent",
+                component:()=>import("@/components/teachers/EditTeacherComponent"),
+            }
         ],
     },
 ];

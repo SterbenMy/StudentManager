@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <el-button @click="handleDelete(studentId)">Delete</el-button>
-  </div>
+  <el-button class="button-trash" @click="handleDelete(studentId)">
+    <i class="icon-trash-2"></i>
+  </el-button>
 </template>
 
 <script>
@@ -21,7 +21,7 @@ export default {
         customClass: "delete-message-box",
       })
           .then(() => {
-            console.log(id);
+            this.$store.dispatch("delete", id);
           })
           .catch(() => {
             return 0;
@@ -32,5 +32,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+.button-trash {
+  margin-left: 0.625rem;
+}
 </style>

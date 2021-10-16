@@ -67,6 +67,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           console.log('submit!');
+          this.createCourse();
           this.dialogVisible=false;
           this.addCourseForm.name="";
           this.addCourseForm.number="";
@@ -76,6 +77,26 @@ export default {
         }
       });
     },
+    createCourse() {
+      this.$store
+          .dispatch("create", {
+            name: this.addCourseForm.name,
+            number: this.addCourseForm.number,
+          })
+          .then(() => {
+            this.$notify.success({
+              title: "Success",
+              message: "You have been successfully added building",
+            });console.log(this.name,this.number);
+          })
+          .catch(() => {
+            this.$notify.error({
+              title: "Error",
+              message:
+                  "Something went wrong on the server, please refresh the page try again",
+            });
+          });
+    }
   },
 }
 </script>

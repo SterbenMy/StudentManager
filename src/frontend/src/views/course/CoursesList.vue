@@ -9,19 +9,18 @@
       <div class="div-card" v-for="course in courses" :key="course.id">
         <el-card class="card">
           <div slot="header" class="clearfix">
-            <span>Course: {{ course.name }}{{course.number}}</span>
-            <span>Students: {{course.students.length}} </span>
+            <span>Course: {{ course.name }}{{ course.number }}</span>
+            <span>Students: {{ course.students.length }} </span>
           </div>
           <div class="buttons-group">
             <el-button>Edit</el-button>
-            <el-button>Details</el-button>
-            <delete-course-component  :course-id="course.id"></delete-course-component>
+            <delete-course-component :course-id="course.id"></delete-course-component>
           </div>
         </el-card>
       </div>
     </div>
     <div class="add-button">
-<!--      <el-button>Add new course</el-button>-->
+      <!--      <el-button>Add new course</el-button>-->
       <add-course-component></add-course-component>
     </div>
   </div>
@@ -30,7 +29,7 @@
 <script>
 import DeleteCourseComponent from "@/components/courses/DeleteCourseComponent";
 import AddCourseComponent from "@/components/courses/AddCourseComponent";
-import CourseService from "@/services/CourseService";
+
 
 export default {
   name: "CoursesList",
@@ -40,16 +39,15 @@ export default {
       courses: [],
     };
   },
-  methods: {
-    getCourses() {
-      CourseService.getCourses().then((response) => {
-        this.courses = response.data;
-      });
-    }
+  methods:{
+    async getList() {
+      await this.$store.dispatch("getCoursesList");
+      this.courses = await this.$store.getters.getList;
+    },
   },
   mounted() {
-    this.getCourses();
-  }
+    this.getList();
+  },
 }
 </script>
 

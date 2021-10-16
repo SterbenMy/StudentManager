@@ -1,12 +1,9 @@
-import axios from 'axios';
+import httpClient from "@/services/httpClient";
 
-const COURSE_API_BASE_URL = 'http://localhost:8080/api/courses';
+const create = (name, number) =>
+    httpClient.post("/courses/add", { name, number });
 
-class CourseService {
+const getCourses = () => httpClient.get("/courses");
+const deleteCourses = (courses) => httpClient.delete(`courses/delete/${courses}`);
 
-    getCourses() {
-        return axios.get(COURSE_API_BASE_URL);
-    }
-}
-
-export default new CourseService();
+export { create, getCourses, deleteCourses };

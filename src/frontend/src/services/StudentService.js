@@ -1,12 +1,9 @@
-import axios from 'axios';
+import httpClient from "@/services/httpClient";
 
-const STUDENT_API_BASE_URL = 'http://localhost:8080/api/students';
+const create = (name, surname, email, gender) =>
+    httpClient.post("/students/add", { name, surname, email, gender });
 
-class StudentService {
+const getStudents = () => httpClient.get("/students");
+const deleteStudent = (students) => httpClient.delete(`students/delete/${students}`);
 
-    getStudents() {
-        return axios.get(STUDENT_API_BASE_URL);
-    }
-}
-
-export default new StudentService();
+export { create, getStudents, deleteStudent };

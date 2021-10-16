@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-loading="loading">
     <el-button @click="dialogVisible = true"> Add Student</el-button>
     <el-dialog
         custom-class="settings-dialog"
@@ -87,8 +87,8 @@ export default {
 
   methods: {
     submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
+      /*this.$refs[formName].validate((valid) => {
+        /*if (valid) {
           console.log('submit!');
           this.dialogVisible=false;
           this.addStudentForm.name="";
@@ -98,8 +98,49 @@ export default {
         } else {
           console.log('error submit!!');
           return false;
-        }
-      });
+        }*/
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            this.addStudent();
+          } else {
+            return false;
+          }
+        });
+      },
+    addStudent() {
+      this.$store
+          .dispatch("create", {
+            name: this.student.name,
+            surname: this.student.surname,
+            email: this.student.email,
+            gender: this.student.gender,
+          })
+          .then(() => {
+            this.$notify.success({
+              title: "Success",
+              message: "You have been successfully added students",
+            });
+            this.dialogVisible = false;
+            this.resetStudent();
+          })
+          .catch(() => {
+            this.$notify.error({
+              title: "Error",
+              message:
+                  "Something went wrong on the server, please refresh the page try again",
+            });
+          });
+    },
+    resetStudent() {
+      this.student.name = "";
+      this.student.surname = "";
+      this.student.email = "";
+      this.student.gender = "";
+    },
+  },
+  computed: {
+    loading() {
+      return this.$store.getters["student/requestStarted"];
     },
   },
 }
