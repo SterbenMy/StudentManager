@@ -28,8 +28,4 @@ public class Teacher implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Gender gender;
-    @JsonIgnore
-    @OneToOne
-    @JoinColumn(name = "course_id")
-    private Course course;
 }
