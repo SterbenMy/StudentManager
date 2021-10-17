@@ -1,6 +1,8 @@
 <template>
   <div>
-    <el-button @click="dialogVisible = true"> Add Teacher</el-button>
+    <div class="add-button">
+      <el-button class="button-add" @click="dialogVisible = true"> Add Student</el-button>
+    </div>
     <el-dialog
         custom-class="settings-dialog"
         title="Add teacher"
@@ -14,15 +16,30 @@
                ref="addTeacherForm"
       >
         <el-form-item label="Name:" prop="name">
-          <el-input v-model="addTeacherForm.name"></el-input>
+          <el-input v-model="addTeacherForm.name">
+          </el-input>
         </el-form-item>
         <el-form-item label="Surname:" prop="surname">
-          <el-input  v-model="addTeacherForm.surname">
-          </el-input>
+          <el-input v-model="addTeacherForm.surname"></el-input>
         </el-form-item>
-        <el-form-item label="Course:" prop="course">
-          <el-input  v-model="addTeacherForm.course">
-          </el-input>
+        <el-form-item label="Email:" prop="email">
+          <el-input v-model="addTeacherForm.email"></el-input>
+        </el-form-item>
+        <el-form-item label="Gender:" prop="gender">
+          <el-select
+              v-model="addTeacherForm.gender"
+              filterable
+              placeholder="Choose gender"
+              class="input select"
+          >
+            <el-option
+                v-for="item in addTeacherForm.genderOpt"
+                :key="item.id"
+                :label="item.name"
+                :value="item.id"
+            >
+            </el-option>
+          </el-select>
         </el-form-item>
         <div class="button-container-actions">
           <el-button @click="dialogVisible = false" class="button-cancel">
@@ -46,7 +63,10 @@ export default {
       addTeacherForm: {
         name: "",
         surname: "",
-        course: ""
+        email: "",
+        gender: "",
+        genderOpt: [{name: "MALE", id: 0}, {name: "FEMALE", id: 1}]
+
       },
       rules: {
         name: [
@@ -63,10 +83,10 @@ export default {
             trigger: ["blur", "change"],
           },
         ],
-        course: [
+        email: [
           {
             required: true,
-            message: "Course is required",
+            message: "Email is required",
             trigger: ["blur", "change"],
           },
         ],
@@ -79,15 +99,42 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           console.log('submit!');
-          this.dialogVisible=false;
-          this.addTeacherForm.name="";
-          this.addTeacherForm.surname="";
-          this.addTeacherForm.course="";
+          this.addTeacher();
         } else {
           console.log('error submit!!');
           return false;
         }
       });
+    },
+    addTeacher() {
+      this.$store
+          .dispatch("createTeacher", {
+            name: this.addTeacherForm.name,
+            surname: this.addTeacherForm.surname,
+            email: this.addTeacherForm.email,
+            gender: this.addTeacherForm.gender,
+          })
+          .then(() => {
+            this.$notify.success({
+              title: "Success",
+              message: "You have been successfully added teacher",
+            });
+            this.dialogVisible = false;
+            this.resetStudent();
+          })
+          .catch(() => {
+            this.$notify.error({
+              title: "Error",
+              message:
+                  "Something went wrong on the server, please refresh the page try again",
+            });
+          });
+    },
+    resetStudent() {
+      this.addTeacherForm.name = "";
+      this.addTeacherForm.surname = "";
+      this.addTeacherForm.email = "";
+      this.addTeacherForm.gender = "";
     },
   },
 }
@@ -102,6 +149,7 @@ export default {
   .el-dialog__header {
     padding-top: 2.25rem;
     padding-bottom: 1.675rem;
+
     .el-dialog__title {
       font-size: 1.5rem;
     }
