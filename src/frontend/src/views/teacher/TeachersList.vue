@@ -3,9 +3,6 @@
     <div class="row-title-teacher">
       <span>Teachers</span>
     </div>
-    <div>
-      <add-teacher-component><el-button>Add teacher</el-button></add-teacher-component>
-    </div>
     <div style="width: 100%">
       <el-table :data="teachers" >
         <el-table-column label="Name" class-name="table-column-name">
@@ -55,13 +52,15 @@
         </el-table-column>
       </el-table>
     </div>
+    <div>
+      <add-teacher-component></add-teacher-component>
+    </div>
   </div>
 </template>
 
 <script>
 import DeleteTeacherComponent from "@/components/teachers/DeleteTeacherComponent";
 import AddTeacherComponent from "@/components/teachers/AddTeacherComponent";
-// import TeacherService from "@/services/TeacherServices";
 
 export default {
   name: "TeacherList",
@@ -73,7 +72,7 @@ export default {
   },
   methods: {
     async getList() {
-      this.$store.dispatch("getList");
+      await this.$store.dispatch("getTeachersList");
       this.teachers = await this.$store.getters.getTeachersList;
     },
   },
