@@ -4,8 +4,8 @@ const create = (name, surname, email, gender) =>
     httpClient.post("/teachers/add", { name, surname, email, gender });
 
 const getTeachers = () => httpClient.get("/teachers");
+const getTeacher = (id) => httpClient.get(`/teachers/find/${id}`);
+
 const deleteTeacher = (teacher) => httpClient.delete(`teachers/delete/${teacher}`);
 
-//const getTeacher = (teacher)=>httpClient.get('teachers/${teacher}');
-
-export { create, getTeachers, deleteTeacher};
+export { create, getTeachers, deleteTeacher, getTeacher};
