@@ -1,6 +1,9 @@
+<script src="../../store/modules/students.js"></script>
 <template>
-  <div v-loading="loading">
-    <el-button @click="dialogVisible = true"> Add Student</el-button>
+  <div>
+    <div class="add-button">
+      <el-button class="button-add" @click="dialogVisible = true"> Add Student</el-button>
+    </div>
     <el-dialog
         custom-class="settings-dialog"
         title="Add student"
@@ -13,9 +16,8 @@
                :rules="rules"
                ref="addStudentForm"
       >
-
         <el-form-item label="Name:" prop="name">
-          <el-input  v-model="addStudentForm.name">
+          <el-input v-model="addStudentForm.name">
           </el-input>
         </el-form-item>
         <el-form-item label="Surname:" prop="surname">
@@ -25,7 +27,20 @@
           <el-input v-model="addStudentForm.email"></el-input>
         </el-form-item>
         <el-form-item label="Gender:" prop="gender">
-          <el-input v-model="addStudentForm.gender"></el-input>
+          <el-select
+              v-model="addStudentForm.gender"
+              filterable
+              placeholder="Choose gender"
+              class="input select"
+          >
+            <el-option
+                v-for="item in addStudentForm.genderOpt"
+                :key="item.id"
+                :label="item.name"
+                :value="item.id"
+            >
+            </el-option>
+          </el-select>
         </el-form-item>
         <div class="button-container-actions">
           <el-button @click="dialogVisible = false" class="button-cancel">
@@ -50,7 +65,8 @@ export default {
         name: "",
         surname: "",
         email: "",
-        gender: ""
+        gender:"",
+        genderOpt: [{name: "MALE", id: 0}, {name: "FEMALE", id: 1}]
       },
       rules: {
         name: [
@@ -74,46 +90,27 @@ export default {
             trigger: ["blur", "change"],
           },
         ],
-        gender: [
-          {
-            required: true,
-            message: "Gender is required",
-            trigger: ["blur", "change"],
-          },
-        ],
       },
     };
   },
 
   methods: {
     submitForm(formName) {
-      /*this.$refs[formName].validate((valid) => {
-        /*if (valid) {
-          console.log('submit!');
-          this.dialogVisible=false;
-          this.addStudentForm.name="";
-          this.addStudentForm.surname="";
-          this.addStudentForm.email="";
-          this.addStudentForm.gender="";
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.addStudent();
         } else {
-          console.log('error submit!!');
           return false;
-        }*/
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            this.addStudent();
-          } else {
-            return false;
-          }
-        });
-      },
+        }
+      });
+    },
     addStudent() {
       this.$store
-          .dispatch("create", {
-            name: this.student.name,
-            surname: this.student.surname,
-            email: this.student.email,
-            gender: this.student.gender,
+          .dispatch("createStudent", {
+            name: this.addStudentForm.name,
+            surname: this.addStudentForm.surname,
+            email: this.addStudentForm.email,
+            gender: this.addStudentForm.gender,
           })
           .then(() => {
             this.$notify.success({
@@ -132,21 +129,20 @@ export default {
           });
     },
     resetStudent() {
-      this.student.name = "";
-      this.student.surname = "";
-      this.student.email = "";
-      this.student.gender = "";
-    },
-  },
-  computed: {
-    loading() {
-      return this.$store.getters["student/requestStarted"];
+      this.addStudentForm.name = "";
+      this.addStudentForm.surname = "";
+      this.addStudentForm.email = "";
+      this.addStudentForm.gender = "";
     },
   },
 }
 </script>
 
 <style scoped lang="scss">
+.add-button {
+  padding: 2rem;
+}
+
 /deep/ {
   .settings-dialog {
     margin-top: 2rem !important;
@@ -155,6 +151,7 @@ export default {
   .el-dialog__header {
     padding-top: 2.25rem;
     padding-bottom: 1.675rem;
+
     .el-dialog__title {
       font-size: 1.5rem;
     }
