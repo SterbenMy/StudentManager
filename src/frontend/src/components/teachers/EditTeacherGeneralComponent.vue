@@ -62,6 +62,18 @@ export default {
           },
         ],
       },
+      methods: {
+        submitForm(formName) {
+          this.$refs[formName].validate((valid) => {
+            if (valid) {
+              console.log('submit!');
+              this.addTeacher();
+            } else {
+              console.log('error submit!!');
+              return false;
+            }
+          });
+        },
     };
   },
 };
