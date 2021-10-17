@@ -13,7 +13,11 @@
             <span>Students: {{ course.students.length }} </span>
           </div>
           <div class="buttons-group">
-            <el-button>Edit</el-button>
+            <router-link
+                :to="{ name: 'EditCourseComponent', params: { id: course.id } }"
+            >
+              <el-button>Edit</el-button>
+            </router-link>
             <delete-course-component :course-id="course.id"></delete-course-component>
           </div>
         </el-card>

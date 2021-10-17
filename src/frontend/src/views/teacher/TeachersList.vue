@@ -47,7 +47,7 @@
             </router-link>
             <delete-teacher-component
                 :teacher-id="scope.row.id"
-            ><el-button type="danger" icon="el-icon-delete" circle></el-button></delete-teacher-component>
+            ></delete-teacher-component>
           </template>
         </el-table-column>
       </el-table>

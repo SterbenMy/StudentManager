@@ -1,4 +1,4 @@
-import {create, getTeachers, deleteTeacher, getTeacher} from "@/services/TeacherServices";
+import {create, getTeachers, deleteTeacher, getTeacher, updateTeacher} from "@/services/TeacherServices";
 
 const state = () => ({
     teachers: {},
@@ -38,6 +38,10 @@ const actions = {
         await deleteTeacher(id);
         commit("SET_TEACHER", id);
     },
+    async updateTeacher({commit}, teacher){
+        await updateTeacher(teacher.id, teacher.name, teacher.surname, teacher.email, teacher.gender);
+        commit('UPDATE_TEACHER', teacher);
+    }
 };
 
 const mutations = {
@@ -50,6 +54,9 @@ const mutations = {
     GET_TEACHER(state, teacher) {
         state.teacher = teacher;
     },
+    UPDATE_TEACHER(state, teacher){
+        state.teacher=teacher;
+    }
 };
 
 export default {

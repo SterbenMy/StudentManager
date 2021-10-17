@@ -22,6 +22,7 @@ export default {
       })
           .then(() => {
             this.$store.dispatch("deleteCourse", id);
+            this.$router.go().catch(()=>{});
           })
           .catch(() => {
             return 0;

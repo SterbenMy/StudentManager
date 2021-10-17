@@ -1,6 +1,6 @@
 <template>
   <div class="students-list">
-    <div class="row-title-teacher">
+    <div class="row-title-student">
       <span>Students</span>
     </div>
     <div style="width: 100%">
@@ -45,16 +45,15 @@
             >
               <el-button type="primary" icon="el-icon-edit" circle></el-button>
             </router-link>
-            <delete-student-component
-                :student-id="scope.row.id"
+            <delete-student-component :student-id="scope.row.id">
+
             ></delete-student-component>
           </template>
         </el-table-column>
       </el-table>
     </div>
     <div>
-      <add-student-component>
-      </add-student-component>
+      <add-student-component></add-student-component>
     </div>
   </div>
 </template>
@@ -93,7 +92,7 @@ export default {
   justify-content: center;
   padding: 2rem 5rem;
 
-  .row-title-teacher {
+  .row-title-student {
     padding: 5rem;
     width: 100%;
 

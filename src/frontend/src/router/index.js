@@ -22,6 +22,11 @@ const routes = [
               component: () => import("@/views/course/CoursesList"),
             },
             {
+                path:"/courses/:id/edit",
+                name:"EditCourseComponent",
+                component:()=>import("@/components/courses/EditCourseComponent"),
+            },
+            {
                 path: "/students",
                 name: "StudentsList",
                 component: () => import("@/views/student/StudentsList"),

@@ -119,6 +119,7 @@ export default {
             });
             this.dialogVisible = false;
             this.resetStudent();
+            this.$router.go().catch(()=>{});
           })
           .catch(() => {
             this.$notify.error({

@@ -2,7 +2,7 @@
   <div class="teacher-edit">
     <el-row type="flex" class="row-edit-teacher-name">
       <el-col class="edit-teacher" :xs="24" :sm="24" :md="8" :lg="8">
-        <span>Edit teacher {{id}}</span>
+        <span>Edit teacher {{ id }}</span>
         <div class="general-info">
           <el-form
               class="edit-general-form"
@@ -31,8 +31,8 @@
     </el-row>
     <el-row class="row-actions-buttons" type="flex">
       <el-col class="col-actions-buttons" :span="24">
-        <el-button class="cancel"> Cancel</el-button>
-        <el-button @click="submitForm('teacherForm')" class="save">Save Changes</el-button>
+        <el-button @click="cancel()" class="cancel"> Cancel</el-button>
+        <el-button @click="updateTeacher('teacherForm')" class="save">Save Changes</el-button>
       </el-col>
     </el-row>
   </div>
@@ -41,12 +41,10 @@
 <script>
 
 export default {
-
   name: "EditTeacherComponent",
   data() {
     return {
-      teacherForm: {
-      },
+      teacherForm: {},
       id: this.$route.params.id,
       rules: {
         name: [
@@ -77,6 +75,9 @@ export default {
     }
   },
   methods: {
+    cancel(){
+      this.$router.push({name: 'TeachersList'})
+    },
     async getTeacher() {
       await this.$store.dispatch("getTeacher", this.id);
       this.teacherForm = await this.$store.getters.getTeacher;
@@ -85,33 +86,37 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           console.log('submit!');
-          // this.updateTeacher();
+          this.updateTeacher();
         } else {
           console.log('error submit!!');
           return false;
         }
       });
     },
-    // updateTeacher() {
-    //   this.$store
-    //       .dispatch("updateTeacher", {
-    //         id: this.$route.params.id,
-    //         data: this.teacherForm
-    //       })
-    //       .then(() => {
-    //         this.$notify.success({
-    //           title: "Success",
-    //           message: "You have been successfully updated teacher",
-    //         });
-    //       })
-    //       .catch(() => {
-    //         this.$notify.error({
-    //           title: "Error",
-    //           message:
-    //               "Something went wrong on the server, please refresh the page try again",
-    //         });
-    //       });
-    // },
+    updateTeacher() {
+      this.$store
+          .dispatch("updateTeacher", {
+            id: this.$route.params.id,
+            name: this.teacherForm.name,
+            surname: this.teacherForm.surname,
+            email: this.teacherForm.email,
+            gender: this.teacherForm.gender,
+          })
+          .then(() => {
+            this.$notify.success({
+              title: "Success",
+              message: "You have been successfully updated teacher",
+            });
+          })
+          .catch(() => {
+            this.$notify.error({
+              title: "Error",
+              message:
+                  "Something went wrong on the server, please refresh the page try again",
+            });
+          });
+      this.$router.push({name: 'TeachersList'})
+    },
   },
   mounted() {
     this.getTeacher();

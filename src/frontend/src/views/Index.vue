@@ -9,13 +9,13 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-              <a class="nav-link" href="courses">Courses</a>
+              <a class="nav-link" href="/courses">Courses</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="students">Students</a>
+              <a class="nav-link" href="/students">Students</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="teachers">Teacher</a>
+              <a class="nav-link" href="/teachers">Teacher</a>
             </li>
           </ul>
         </div>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="add-button">
-      <el-button class="button-add" @click="dialogVisible = true"> Add Student</el-button>
+      <el-button class="button-add" @click="dialogVisible = true"> Add Teacher</el-button>
     </div>
     <el-dialog
         custom-class="settings-dialog"
@@ -120,7 +120,8 @@ export default {
               message: "You have been successfully added teacher",
             });
             this.dialogVisible = false;
-            this.resetStudent();
+            //this.resetTeacher();
+            this.$router.go().catch(()=>{});
           })
           .catch(() => {
             this.$notify.error({

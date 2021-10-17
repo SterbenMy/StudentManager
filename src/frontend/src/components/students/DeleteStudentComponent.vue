@@ -21,10 +21,12 @@ export default {
       })
           .then(() => {
             this.$store.dispatch("deleteStudent", id);
+            this.$router.go().catch(()=>{});
           })
           .catch(() => {
             return 0;
           });
+
     },
   },
 }
