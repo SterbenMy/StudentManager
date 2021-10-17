@@ -79,15 +79,15 @@ export default {
     },
     createCourse() {
       this.$store
-          .dispatch("create", {
+          .dispatch("createCourse", {
             name: this.addCourseForm.name,
             number: this.addCourseForm.number,
           })
           .then(() => {
             this.$notify.success({
               title: "Success",
-              message: "You have been successfully added building",
-            });console.log(this.name,this.number);
+              message: "You have been successfully added course",
+            });
           })
           .catch(() => {
             this.$notify.error({
