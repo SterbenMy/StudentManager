@@ -4,6 +4,7 @@ package com.ims.studentsmanager.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -17,17 +18,19 @@ import java.util.List;
 @Data
 @Table(name = "course")
 public class Course implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, updatable = false)
     private Long id;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String name;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private int number;
-    @OneToOne(mappedBy = "course",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name="teacher_id")
     private Teacher teacher;
-    @OneToMany(targetEntity = Student.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "student_id", referencedColumnName = "id")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "course_fk", referencedColumnName = "id")
     List<Student> students = new ArrayList<>();
 }

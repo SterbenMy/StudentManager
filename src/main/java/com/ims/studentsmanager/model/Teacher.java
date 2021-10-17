@@ -19,13 +19,12 @@ public class Teacher implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, updatable = false)
     private Long id;
-    @Column(nullable = false)
     private String name;
-    @Column(nullable = false)
     private String surname;
-    @Column(nullable = false, unique = true)
     private String email;
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private Gender gender;
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "teacher")
+    private Course course;
 }
