@@ -20,7 +20,6 @@
       </div>
     </div>
     <div class="add-button">
-      <!--      <el-button>Add new course</el-button>-->
       <add-course-component></add-course-component>
     </div>
   </div>
@@ -39,14 +38,14 @@ export default {
       courses: [],
     };
   },
-  methods:{
-    async getList() {
+  methods: {
+    async getCoursesList() {
       await this.$store.dispatch("getCoursesList");
-      this.courses = await this.$store.getters.getList;
+      this.courses = await this.$store.getters.getCoursesList;
     },
   },
   mounted() {
-    this.getList();
+    this.getCoursesList();
   },
 }
 </script>
