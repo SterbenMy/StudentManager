@@ -12,7 +12,7 @@ const getters = {
 };
 
 const actions = {
-    async create({commit}, students) {
+    async createStudent({commit}, students) {
         try {
             await create(students.name, students.surname, students.email, students.gender);
             commit("SET_STUDENT", students);
@@ -22,12 +22,12 @@ const actions = {
         }
     },
 
-    async getList({commit}) {
+    async getStudentsList({commit}) {
         const response = getStudents();
         commit("SET_LIST", response);
     },
 
-    async delete({commit}, id) {
+    async deleteStudent({commit}, id) {
         await deleteStudent(id);
         commit("DELETE_STUDENT", id);
     },

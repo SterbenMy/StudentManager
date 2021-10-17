@@ -6,13 +6,13 @@ const state = () => ({
 });
 
 const getters = {
-    getList(state) {
+    getCoursesList(state) {
         return state.list;
     },
 };
 
 const actions = {
-    async create({commit}, courses) {
+    async createCourse({commit}, courses) {
         try {
             await create(courses.name, courses.number);
             commit("SET_COURSE", courses);
@@ -26,7 +26,7 @@ const actions = {
         const response = getCourses();
         commit("SET_LIST", response);
     },
-    async delete({ commit }, id) {
+    async deleteCourse({ commit }, id) {
         await deleteCourses(id);
         commit("DELETE_COURSES", id);
     },

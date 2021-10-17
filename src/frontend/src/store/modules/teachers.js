@@ -1,21 +1,22 @@
-import {create, getTeachers, deleteTeacher} from "@/services/TeacherServices";
+import {create, getTeachers, deleteTeacher, getTeacher} from "@/services/TeacherServices";
 
 const state = () => ({
     teachers: {},
     list: {},
+    teacher: {},
 });
 
 const getters = {
     getTeachersList(state) {
         return state.list;
     },
-    // getTeacher(state, id){
-    //     return state.teachers[id]
-    // }
+    getTeacher(state) {
+        return state.teacher;
+    }
 };
 
 const actions = {
-    async create({commit}, teachers) {
+    async createTeacher({commit}, teachers) {
         try {
             await create(teachers.name, teachers.surname, teachers.email, teachers.gender);
             commit("SET_TEACHER", teachers);
@@ -24,19 +25,18 @@ const actions = {
             throw e;
         }
     },
-
-    async getList({commit}) {
+    async getTeachersList({commit}) {
         const response = getTeachers();
         commit("SET_LIST", response);
     },
-    // async getTeacher({commit}, id) {
-    //     const response = getTeacher(id);
-    //     commit("GET_TEACHER", response);
-    // },
+    async getTeacher({commit}, id) {
+        const response = getTeacher(id);
+        commit("GET_TEACHER", response);
+    },
 
-    async delete({commit}, id) {
+    async deleteTeacher({commit}, id) {
         await deleteTeacher(id);
-        commit("DELETE_TEACHER", id);
+        commit("SET_TEACHER", id);
     },
 };
 
@@ -47,12 +47,9 @@ const mutations = {
     SET_LIST(state, teachers) {
         state.list = teachers;
     },
-    DELETE_TEACHER(state, teachers) {
-        state.teachers = teachers;
+    GET_TEACHER(state, teacher) {
+        state.teacher = teacher;
     },
-    GET_TEACHER(state, id){
-        state.teachers = id;
-    }
 };
 
 export default {
